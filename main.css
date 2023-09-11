@@ -6,27 +6,13 @@
 body {
     font-size: 10px;
     font-family: Tahoma, Arial;
-    background-image: url('bg.png'); 
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
-}
-
-div.navbar {
-    display: flex;
-    position: sticky; 
-    align-items: center;
-    justify-content: center;
-    top: 0px;
-    cursor: pointer;
 }
 
 div.menu {
     width: 100%;
     background-color: #3d4678;
     height: 44px;
-    padding: 30px 40px;
+    padding: 0 40px;
 }
 
 div.menu ul {
@@ -45,7 +31,8 @@ div.menu ul li {
 }
 
 div.menu ul li a {
-    padding: 30px 40px;
+    display: block;
+    padding: 0 20px;
     line-height: 44px;
     font-size: 1.4em;
     text-decoration: none;
@@ -65,7 +52,6 @@ img[aria-label="Personal Budget Logo"] {
     border-radius: 10px; 
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); 
 }
-
 
 div.hero {
     height: 350px;
