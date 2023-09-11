@@ -2,17 +2,19 @@
     box-sizing: border-box;
 }
 
-
 body {
-    font-size: 10px;
-    font-family: Tahoma, Arial;
+    font-size: 16px;
+    font-family: Tahoma, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 div.menu {
-    width: 100%;
     background-color: #3d4678;
     height: 44px;
-    padding: 0 40px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
 }
 
 div.menu ul {
@@ -20,53 +22,43 @@ div.menu ul {
     padding: 0;
     list-style: none;
     display: flex;
-    justify-content: space-between; 
-    align-items: center;
 }
+
 div.menu ul li {
-    margin: 0;
-    padding: 0 ;
+    margin-right: 20px;
     list-style: none;
-    display: inline-block;
 }
 
 div.menu ul li a {
-    display: block;
-    padding: 0 20px;
-    line-height: 44px;
-    font-size: 1.4em;
     text-decoration: none;
     color: #fff;
-    margin: 0;
+    font-size: 1.4em;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-div.menu ul li a:hover  {
+div.menu ul li a:hover {
     background-color: rgb(234, 233, 229);
     color: #4d5791;
 }
 
-img[aria-label="Personal Budget Logo"] {
-    display: block; 
-    margin: 0 auto; 
-    border: 2px solid #4d5791; 
-    border-radius: 10px; 
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); 
+div.menu img[aria-label="Personal Budget Logo"] {
+    display: inline-block;
+    margin-right: 10px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid #4d5791;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 div.hero {
-    height: 350px;
     background-color: #b4c6f0;
     background-image: url('/bg.png');
-    background-size: 400px;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center bottom;
     padding-top: 40px;
-}
-
-div.hero h1,
-div.hero h2 {
     text-align: center;
-    margin: 0;
 }
 
 div.hero h1 {
@@ -77,26 +69,13 @@ div.hero h1 {
 
 div.hero h2 {
     color: #4d5791;
+    margin-bottom: 20px;
 }
 
 .container {
-    padding: 40px;
-    width: 100%;
-}
-
-.page-area {
-    max-width: 768px;
-    display: inline-block;
-}
-
-.bottom {
-    height: 50px;
-    background-color: #b4c6f0;
-    padding: 40px;
-}
-
-.center {
-    text-align: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .container div.text-box {
@@ -108,7 +87,11 @@ div.hero h2 {
 }
 
 @media screen and (min-width: 768px) {
-    .container .div.text-box {
+    div.menu ul li {
+        margin-right: 30px;
+    }
+
+    .container div.text-box {
         margin: 10px;
     }
 }
