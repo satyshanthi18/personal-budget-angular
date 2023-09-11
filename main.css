@@ -37,10 +37,14 @@ nav ul li a:hover  {
     color: #4d5791;
 }
 
+img.logo {
+    position: relative;
+    width: 100px;
+}
 div.hero {
     height: 350px;
     background-color: #b4c6f0;
-    background-image: url('/pb/bg.png');
+    background-image: url('/bg.png');
     background-size: 400px;
     background-repeat: no-repeat;
     background-position: center bottom;
@@ -62,7 +66,7 @@ div.hero h2 {
 }
 
 div.hero h1 {
-    color: #fff;
+    color: #194dd2;
     font-size: 4.2em;
     margin-bottom: 20px;
 }
