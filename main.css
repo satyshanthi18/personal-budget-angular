@@ -1,109 +1,118 @@
-
 * {
     box-sizing: border-box;
 }
 
-
 body {
-    font-size: 16px;
-    font-family: Tahoma, Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+    font-size: 16px; 
+    font-family: Tahoma, Arial, sans-serif; 
+    margin: 0; 
+    padding: 0; 
 }
 
-
-div.menu {
+nav[role="navigation"] {
     background-color: #3d4678;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-    padding: 10px 40px; 
 }
 
+nav[role="navigation"] ul.menu {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    margin: 0;
+    height: 44px;
+}
 
-div.menu ul {
+nav[role="navigation"] ul.menu li {
+    display: inline-block;
     margin: 0;
     padding: 0;
-    list-style: none;
-    display: flex;
 }
 
-
-div.menu ul li {
-    margin-right: 20px; 
-    list-style: none;
-}
-
-div.menu ul li a {
+nav[role="navigation"] ul.menu li a {
+    display: block;
+    padding: 0 20px;
+    line-height: 44px;
+    font-size: 1.4em;
     text-decoration: none;
     color: #fff;
-    font-size: 1.4em;
-    transition: background-color 0.3s, color 0.3s;
 }
 
-
-div.menu ul li a:hover {
+nav[role="navigation"] ul.menu li a:hover {
     background-color: rgb(234, 233, 229);
     color: #4d5791;
 }
 
-
-div.menu img[aria-label="Personal Budget Logo"] {
-    width: 40px; 
-    height: 40px; 
+img[alt="Personal Budget Logo"] {
+    display: block;
+    margin: 0 auto;
     border: 2px solid #4d5791;
     border-radius: 10px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
 }
 
-
 div.hero {
+    height: 350px;
     background-color: #b4c6f0;
     background-image: url('/bg.png');
     background-size: cover; 
     background-repeat: no-repeat;
     background-position: center bottom;
-    padding: 40px 0;
-    text-align: center; 
+    padding-top: 40px;
 }
 
+div.hero h1,
+div.hero h2 {
+    text-align: center;
+    margin: 0;
+    color: #fff;
+}
 
 div.hero h1 {
-    color: #fff;
-    font-size: 4.2em;
+    font-size: 2.8em; 
     margin-bottom: 20px;
 }
-
 
 div.hero h2 {
     color: #4d5791;
-    margin-bottom: 20px;
 }
-
 
 .container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 20px; 
+    width: 100%;
+    text-align: center; 
 }
 
+.page-area {
+    max-width: 768px;
+    margin: 0 auto; 
+    padding: 20px; 
+    text-align: left; 
+}
 
-.container div.text-box {
-    display: inline-block;
+.page-area .text-box {
     width: 100%;
     max-width: 340px;
+    margin: 20px auto; 
     text-align: justify;
-    margin: 20px;
 }
 
-
 @media screen and (min-width: 768px) {
-    div.menu ul li {
-        margin-right: 30px; 
+    .page-area .text-box {
+        margin: 10px; 
     }
+}
 
+.bottom {
+    height: 50px;
+    background-color: #b4c6f0;
+    padding: 20px; /
+}
 
-    .container div.text-box {
-        margin: 10px;
-    }
+.center {
+    text-align: center;
+}
+
+footer {
+    color: #fff;
 }
