@@ -69,6 +69,13 @@
 
     </div>
 
+    <div class="text-box">
+        <h1>D3JS Chart</h1>
+        <p>
+            <div class="D3JSChart"></div>
+        </p>
+    </div>
+
     <div class="bottom">
         <div class="center">
             <footer role="contentinfo"><!-- This is a Semantic HTML Change --> <!-- This is an A11y Change -->
@@ -80,6 +87,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.0/axios.min.js" integrity="sha512-aoTNnqZcT8B4AmeCFmiSnDlc4Nj/KPaZyB5G7JnOnUEkdNpCZs1LCankiYi01sLTyWy+m2P+W4XM+BuQ3Q4/Dg==" crossorigin="anonymous"></script>
    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.js" integrity="sha512-7U4rRB8aGAHGVad3u2jiC7GA5/1YhQcQjxKeaVms/bT66i3LVBMRcBI9KwABNWnxOSwulkuSXxZLGuyfvo7V1A==" crossorigin="anonymous"></script>-->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+   <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
         var dataSource = {
             datasets: [
@@ -119,7 +127,94 @@
             });
         }
         getBudget();
+
+
     </script>
+
+<script>
+
+var data = {
+            datasets: [
+                {
+                    data: [],
+                    backgroundColor: [
+                        '#ffcd56',
+                        '#ff6384',
+                        '#36a2eb',
+                        '#fc6b19',
+                        '#ff5733',
+                        '#117a65',
+                        '#9b59b6'
+                    ],
+                }
+            ],
+            labels: []
+        };
+
+
+        function D3Chart() {
+    
+    const w = 350;
+    const h = 300;
+    const r = Math.min(w, h) / 2;
+
+    
+    const color = d3.scaleOrdinal()
+        .domain(data.labels)
+        .range(data.datasets[0].backgroundColor); 
+
+   
+    const svg = d3.select(".D3JSChart")
+        .append("svg")
+        .attr("width", w)
+        .attr("height", h)
+        .append("g")
+        .attr("transform", `translate(${w / 2},${h / 2})`);
+
+    
+    const pie = d3.pie()
+        .value(d => d);
+
+   
+    const arc = d3.arc()
+        .innerRadius(r - 50) 
+        .outerRadius(r);
+
+   
+    const arcs = svg.selectAll("arc")
+        .data(pie(data.datasets[0].data))
+        .enter()
+        .append("g")
+        .attr("class", "arc");
+
+    
+    arcs.append("path")
+        .attr("d", arc)
+        .attr("fill", (d, i) => color(i)); 
+
+    
+    arcs.append("text")
+        .attr("transform", d => `translate(${arc.centroid(d)})`)
+        .attr("text-anchor", "middle")
+        .text((d, i) => data.labels[i]);
+}
+
+function getBudget() {
+    axios.get('/budget')
+    .then(function (res) {
+        console.log(res);
+        data.labels = []; 
+        data.datasets[0].data = []; 
+        for (var i = 0; i < res.data.budget.length; i++) {
+            data.labels.push(res.data.budget[i].title);
+            data.datasets[0].data.push(res.data.budget[i].budget);
+        }
+        D3Chart();
+    });
+}
+
+getBudget();
+</script>
 
 </body>
 </html>
