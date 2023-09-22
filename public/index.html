@@ -89,7 +89,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script>
-        var dataSource = {
+        var data = {
             datasets: [
                 {
                     data: [],
@@ -111,93 +111,97 @@
             var ctx = document.getElementById("myChart").getContext("2d");
             var myPieChart = new Chart(ctx, {
                 type: 'pie',
-                data: dataSource
+                data: data
             });
         }
 
-        function getBudget() {
-            axios.get('/budget')
-            .then(function (res) {
-                console.log(res);
-                for (var i = 0; i < res.data.budget.length; i++) {
-                    dataSource.datasets[0].data[i] = res.data.budget[i].budget;
-                    dataSource.labels[i] = res.data.budget[i].title;
-                }
+        function D3Chart() {
+        
+            const w = 350;
+            const h = 300;
+            const r = Math.min(w, h) / 2;
+
+                
+            const color = d3.scaleOrdinal()
+                .domain(data.labels)
+                .range(data.datasets[0].backgroundColor); 
+
+            
+            const svg = d3.select(".D3JSChart")
+                .append("svg")
+                .attr("width", w)
+                .attr("height", h)
+                .append("g")
+                .attr("transform", `translate(${w / 2},${h / 2})`);
+
+                
+            const pie = d3.pie()
+                .value(d => d);
+
+            
+            const arc = d3.arc()
+                .innerRadius(r - 50) 
+                .outerRadius(r);
+
+            
+            const arcs = svg.selectAll("arc")
+                .data(pie(data.datasets[0].data))
+                .enter()
+                .append("g")
+                .attr("class", "arc");
+
+            
+            arcs.append("path")
+                .attr("d", arc)
+                .attr("fill", (d, i) => color(i)); 
+
+            
+            arcs.append("text")
+                .attr("transform", d => `translate(${arc.centroid(d)})`)
+                .attr("text-anchor", "middle")
+                .text((d, i) => data.labels[i]);
+            }
+
+            function getBudget() {
+                axios.get('http://localhost:3000/budget')
+                    .then(function (res) {
+                    console.log(res);
+                    for (var i = 0; i < res.data.budget.length; i++) {
+                        data.datasets[0].data[i] = res.data.budget[i].budget;
+                        data.labels[i] = res.data.budget[i].title;
+                    }
                     createChart();
+                    D3Chart();
             });
         }
-        getBudget();
+            getBudget();
 
 
     </script>
 
-<script>
+<!-- 
+    <script>
 
-var data = {
-            datasets: [
-                {
-                    data: [],
-                    backgroundColor: [
-                        '#ffcd56',
-                        '#ff6384',
-                        '#36a2eb',
-                        '#fc6b19',
-                        '#ff5733',
-                        '#117a65',
-                        '#9b59b6'
-                    ],
-                }
-            ],
-            labels: []
-        };
+// var data = {
+//             datasets: [
+//                 {
+//                     data: [],
+//                     backgroundColor: [
+//                         '#ffcd56',
+//                         '#ff6384',
+//                         '#36a2eb',
+//                         '#fc6b19',
+//                         '#ff5733',
+//                         '#117a65',
+//                         '#9b59b6'
+//                     ],
+//                 }
+//             ],
+//             labels: []
+        // };
 
 
-        function D3Chart() {
-    
-    const w = 350;
-    const h = 300;
-    const r = Math.min(w, h) / 2;
-
-    
-    const color = d3.scaleOrdinal()
-        .domain(data.labels)
-        .range(data.datasets[0].backgroundColor); 
-
-   
-    const svg = d3.select(".D3JSChart")
-        .append("svg")
-        .attr("width", w)
-        .attr("height", h)
-        .append("g")
-        .attr("transform", `translate(${w / 2},${h / 2})`);
-
-    
-    const pie = d3.pie()
-        .value(d => d);
-
-   
-    const arc = d3.arc()
-        .innerRadius(r - 50) 
-        .outerRadius(r);
-
-   
-    const arcs = svg.selectAll("arc")
-        .data(pie(data.datasets[0].data))
-        .enter()
-        .append("g")
-        .attr("class", "arc");
-
-    
-    arcs.append("path")
-        .attr("d", arc)
-        .attr("fill", (d, i) => color(i)); 
-
-    
-    arcs.append("text")
-        .attr("transform", d => `translate(${arc.centroid(d)})`)
-        .attr("text-anchor", "middle")
-        .text((d, i) => data.labels[i]);
-}
+        
 
 function getBudget() {
     axios.get('/budget')
@@ -215,6 +219,7 @@ function getBudget() {
 
 getBudget();
 </script>
+-->
 
 </body>
 </html>
