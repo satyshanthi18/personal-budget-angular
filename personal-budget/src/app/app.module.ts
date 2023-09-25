@@ -16,6 +16,7 @@ import { RouterModule } from '@angular/router';
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { ContactComponent } from './contact/contact.component';
 import { DataService } from './data.service';
+import { DonutchartComponent } from './donutchart/donutchart.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,8 @@ import { DataService } from './data.service';
     LoginComponent,
     P404Component,
     BreadcrumbsComponent,
-    ContactComponent
+    ContactComponent,
+    DonutchartComponent
   ],
   imports: [
     BrowserModule,
